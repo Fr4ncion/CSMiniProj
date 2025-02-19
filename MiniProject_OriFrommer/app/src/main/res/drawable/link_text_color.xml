@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="?android:attr/textColorLinkInverse" android:state_pressed="true"/> <!-- Brighter color when clicked -->
+    <item android:color="?android:attr/textColorLink"/> <!-- Normal color -->
+</selector>
