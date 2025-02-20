@@ -186,7 +186,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // @output: ArrayList representing the users database content
-    public ArrayList<User> viewAll() {
+    public ArrayList<User> getAllUsers() {
 
         ArrayList<User> users = new ArrayList<>(); // create an empty list to return
         db = this.getReadableDatabase(); // open the database for reading
