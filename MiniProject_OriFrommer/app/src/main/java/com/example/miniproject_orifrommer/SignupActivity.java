@@ -26,10 +26,15 @@ public class SignupActivity extends AppCompatActivity {
         initUI();
     }
 
+    /**
+     Function will initialize all objects on screen (UI)
+     */
     private void initUI()
     {
+        //Initialize objects
         goLogin = findViewById(R.id.linkLogin);
 
+        //Set listeners and events
         goLogin.setOnClickListener(v -> {
             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
             startActivity(intent);
