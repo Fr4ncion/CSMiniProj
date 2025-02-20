@@ -2,7 +2,10 @@ package com.example.miniproject_orifrommer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -13,7 +16,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextView goSignup;
+    private TextView goSignup;
+    private EditText etPassword;
+    private Button btnPassVisible;
+
+
+    private final String TEXT_HIDE = "Hide";
+    private final String TEXT_SHOW = "Show";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +45,21 @@ public class LoginActivity extends AppCompatActivity {
     {
         //Initialize objects
         goSignup = findViewById(R.id.linkSignup);
+        etPassword = findViewById(R.id.inputPassword);
+        btnPassVisible = findViewById(R.id.btnShowPass);
+
+        btnPassVisible.setOnClickListener(v -> {
+            if (etPassword.getInputType() == (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD)) {
+                // Hide password
+                btnPassVisible.setText(TEXT_SHOW);
+                etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            } else {
+                // Show password
+                btnPassVisible.setText(TEXT_HIDE);
+                etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            }
+
+        });
 
 
         //Set Listeners and events
