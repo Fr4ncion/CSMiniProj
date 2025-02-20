@@ -6,6 +6,7 @@ import android.text.InputType;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,12 +17,13 @@ import androidx.core.view.WindowInsetsCompat;
 public class SignupActivity extends AppCompatActivity {
 
     private TextView goLogin;
+    private EditText etUsername;
     private EditText etPassword;
+    private EditText etPasswordConfirmation;
     private Button btnPassVisible;
+    private Button btnSignup;
 
 
-    private final String TEXT_HIDE = "Hide";
-    private final String TEXT_SHOW = "Show";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,23 +44,41 @@ public class SignupActivity extends AppCompatActivity {
     {
         //Initialize objects
         goLogin = findViewById(R.id.linkLogin);
+        etUsername = findViewById(R.id.inputUsername);
         etPassword = findViewById(R.id.inputPassword);
+        etPasswordConfirmation = findViewById(R.id.inputPassConfirm);
         btnPassVisible = findViewById(R.id.btnShowPass);
+        btnSignup = findViewById(R.id.btnSignup);
 
+        //Set listeners and events
         btnPassVisible.setOnClickListener(v -> {
             if (etPassword.getInputType() == (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD)) {
                 // Hide password
-                btnPassVisible.setText(TEXT_SHOW);
+                btnPassVisible.setText(Utils.TEXT_SHOW);
                 etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                etPasswordConfirmation.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             } else {
                 // Show password
-                btnPassVisible.setText(TEXT_HIDE);
+                btnPassVisible.setText(Utils.TEXT_HIDE);
                 etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                etPasswordConfirmation.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             }
 
         });
 
-        //Set listeners and events
+        btnSignup.setOnClickListener(v -> {
+            final String[] inputs = { Utils.getEditTextValue(etUsername).trim(), Utils.getEditTextValue(etPassword), Utils.getEditTextValue(etPasswordConfirmation) };
+            if(Utils.foundEmptyField(inputs))
+            {
+                Toast.makeText(this, Utils.ERROR_EMPTY, Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+
+            }
+        });
+
+
         goLogin.setOnClickListener(v -> {
             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
             startActivity(intent);
